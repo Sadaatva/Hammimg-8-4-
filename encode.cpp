@@ -1,6 +1,5 @@
 #include <iostream>
 #include <bitset>
-#include "encode.h"
 
 bool ans(bool n1, bool n2, bool n3, bool n4) {
     return (n1 + n2 + n3 + n4) % 2;

@@ -1,7 +1,5 @@
 #include <iostream>
 #include <bitset>
-#include "encode.h"
-#include "decode.h"
 
 int decodeHelper(int s) {
     std::bitset<8> bits(s);

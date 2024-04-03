@@ -18,6 +18,7 @@ int decodeHelper(int s) {
         std::cout << "Packet accepted.\n";
     } else if (A && B && C && !D) {
         std::cout << "Error in p4, but packet accepted.\n";
+        bits.flip(6);
     } else if ((!A || !B || !C) && !D) {
         std::cout << "Single error\n";
         if (!A && B && C) bits.flip(0);
@@ -26,7 +27,6 @@ int decodeHelper(int s) {
         if (A && !B && !C) bits.flip(3);
         if (A && B && !C) bits.flip(4);
         if (!A && B && !C) bits.flip(5);
-        if (!A && !B && !C) bits.flip(6);
         if (!A && !B && C) bits.flip(7);
     } else if (!A && !B && !C && D) {
         std::cout << "Double error, rejecting packet.\n";
@@ -46,7 +46,9 @@ int decodeHelper(int s) {
     return ss;
 }
 
-void decode(short st){
+int decode(short st) {
+    int res = 0;
+
     int s1 = st >> 8;
     int s2 = st;
 
@@ -54,7 +56,10 @@ void decode(short st){
     int s22 = decodeHelper(s2);
 
     if (s11 != -1 && s22 != -1) {
-        int res = s11 * 16 + s22; 
-        std::cout << "Decoded integer value: " << res << std::endl;
-    } 
+        res = s11 * 16 + s22; 
+    } else {
+        res = -1;
+    }
+    
+    return res;
 }

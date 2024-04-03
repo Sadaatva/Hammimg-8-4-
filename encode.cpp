@@ -1,5 +1,6 @@
 #include <iostream>
 #include <bitset>
+#include "encode.h"
 
 bool ans(bool n1, bool n2, bool n3, bool n4) {
     return (n1 + n2 + n3 + n4) % 2;
@@ -27,7 +28,7 @@ std::bitset<8> encodeHam(std::bitset<4> data) {
     return encoded;
 }
 
-std::bitset<16> encode(char c) {
+std::bitset<16> encode(int c) {
     std::bitset<8> bits(c);
 
     std::bitset<4> firstPart(bits.to_string().substr(0, 4));
@@ -40,16 +41,4 @@ std::bitset<16> encode(char c) {
 
     return encoded;
 }
-
-int main() {
-    int i = 53;
-	
-	std::bitset<8> s(i);
-    std::bitset<16> intt = encode(i);
-
-    std::cout << "S: " << i << " = " << s << " Encoded: " << intt << "\n";
-
-    return 0;
-}
-
 
